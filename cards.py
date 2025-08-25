@@ -27,8 +27,10 @@ print(f"{heal}")
 
 # Status cards
 poison = Card("Poison", "Poison damage", 1)
+atkp = Card("Strength", "Buff ATK", 1)
 status_deck = [
     poison
+    atkp
 ]
 
 print(f"{poison}")
