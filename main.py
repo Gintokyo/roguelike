@@ -1,5 +1,9 @@
 # Roguelike game
 
+# Importing other files
+#import cards
+#import apply
+
 print("Hi and welcome to this simple Python roguelike game!")
 
 # Classes
@@ -12,9 +16,9 @@ class Classe:
     def __str__(self):
         return f"{self.name} -> " + " ".join(f"{k}: {v}" for k, v in self.stats.items())
 
-warrior = Classe("Warrior",{"hp": 25, "atk": 15, "def": 15})
-wizard = Classe("Wizard",{"hp": 15, "atk": 25, "def": 5})
-oplita = Classe("Oplita",{"hp": 20, "atk": 10, "def": 20})
+warrior = Classe("Warrior",{"HP": 25, "ATK": 15, "DEF": 15})
+wizard = Classe("Wizard",{"HP": 15, "ATK": 25, "DEF": 5})
+oplita = Classe("Oplita",{"HP": 20, "ATK": 10, "DEF": 20})
 
 
 print("Please, select your Classe:")
@@ -62,12 +66,13 @@ while selectedClasse == None:
 
 
 print(f"Are you ready to start, {selectedClasse.name}?")
+print(f"{cards.fireball}")
 
 #print(f"Your {selectedClasse.name}'s hp are {selectedClasse.stats["hp"]}")
 # How to change a stat
 #selectedClasse.stats["hp"] -= 5
 #print(f"Now your {selectedClasse.name}'s hp are {selectedClasse.stats["hp"]}")
 # Game is starting now
-gameOver = False
-while gameOver == False:
+#gameOver = False
+#while gameOver == False:
     
