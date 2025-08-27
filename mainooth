@@ -1,0 +1,138 @@
+# Roguelike game
+
+print("Hi and welcome to this simple Python roguelike game!")
+
+# Classes
+class Classe:
+    def __init__(self, name, stats):
+        self.name = name
+        self.stats = stats
+        
+    # Printing nicer output
+    def __str__(self):
+        return f"{self.name} -> " + " ".join(f"{k}: {v}" for k, v in self.stats.items())
+
+warrior = Classe("Warrior",{"HP": 25, "ATK": 15, "DEF": 15})
+wizard = Classe("Wizard",{"HP": 15, "ATK": 25, "DEF": 5})
+oplita = Classe("Oplita",{"HP": 20, "ATK": 10, "DEF": 20})
+
+#----------------------------------------------------------------------------------------------
+# Cards
+# Damage cards
+class Card:
+    def __init__(self, name, effect, power):
+        self.name = name
+        self.effect = effect
+        self.power = power
+        
+    # Printing card
+    def __str__(self):
+        return f"{self.name} {self.effect} {self.power}"
+    
+    # self == card, player == card player, enemy == receiver
+    def applyEffect (self, player, enemy):
+        if self.effect == "Attack":
+            enemy["HP"] -= self.power
+            print(f"{self.name} does {self.power} damage to {enemy.name}'s HP")
+        elif self.effect == "Heal":
+            enemy["HP"] += self.power
+            print(f"{self.name} heals {self.power} HPs to {enemy.name}")
+        elif self.effect == "Buff ATK":
+            enemy["ATK"] += self.power
+            print(f"{self.name} boosts {enemy.name} ATK by self.power ")
+
+
+fireball = Card("Fireball", "attack", 5)
+dmg_deck = [
+    fireball
+]
+
+print(f"{fireball}")
+
+# Healing cards
+heal = Card("Heal", "Heal", 5)
+heal_deck = [
+    heal
+]
+
+print(f"{heal}")
+
+# Status cards
+poison = Card("Poison", "Poison damage", 1)
+atkp = Card("Strength", "Buff ATK", 1)
+status_deck = [
+    poison
+    atkp
+]
+
+print(f"{poison}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+#----------------------------------------------------------------------------------------------
+
+print("Please, select your Classe:")
+selectedClasse = None
+# Needed to store the resutl outside the loop once it ends
+while selectedClasse == None:
+    selection = input(f"1. {warrior}\n2. {wizard}\n3. {oplita}\n")
+    match selection:
+        case "1":
+            answer = input(f"You selected {warrior}.\nAre you okay with this(y/n)? ")
+            if answer.lower() == "n":
+                print("What Classe would you choose?")
+                continue
+            elif answer.lower() =="y":
+                selectedClasse = warrior
+                # break must be after the re-assignment of the variable
+                break
+            else:
+                print("Select your Classe, ¡por favor!")
+                continue
+        case "2":
+            answer = input(f"You selected {wizard}.\nAre you okay with this(y/n)? ")
+            if answer.lower() == "n":
+                print("What Classe would you choose?")
+                continue
+            elif answer.lower() =="y":
+                selectedClasse = wizard
+                break
+            else:
+                print("Select your Classe, ¡por favor!")
+                continue
+        case "3":
+           answer = input(f"You selected {oplita}.\nAre you okay with this(y/n)? ")
+           if answer.lower() == "n":
+                print("What Classe would you choose?")
+                continue
+           elif answer.lower() =="y":
+                selectedClasse = oplita
+                break
+           else:
+                print("Select your Classe, ¡por favor!")
+                continue
+        case _:
+            print(f"Select a Classe before starting!")
+
+
+print(f"Are you ready to start, {selectedClasse.name}?")
+print(f"{cards.fireball}")
+
+#print(f"Your {selectedClasse.name}'s hp are {selectedClasse.stats["hp"]}")
+# How to change a stat
+#selectedClasse.stats["hp"] -= 5
+#print(f"Now your {selectedClasse.name}'s hp are {selectedClasse.stats["hp"]}")
+# Game is starting now
+#gameOver = False
+#while gameOver == False:
+    
