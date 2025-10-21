@@ -85,10 +85,16 @@ player_deck = [
     heal,
     atkp
     ]
-    
-for card in player_deck:
-    print(card)
-    
+# Function to print cards in the deck (will become Cards in Hand)
+def my_deck():
+    n = 1
+    for card in player_deck:
+        print(f"{n}. {card}")
+        n += 1
+#for cards in player_deck:
+#    cards = 0
+#    print(player_deck[cards])
+#    cards = cards + 1
 
 print("Please, select your Classe:")
 selectedClasse = None
@@ -106,7 +112,7 @@ while selectedClasse == None:
                 # break must be after the re-assignment of the variable
                 break
             else:
-                print("Select your Classe, Â¡por favor!")
+                print("Select your Classe, ¡por favor!")
                 continue
         case "2":
             answer = input(f"You selected {wizard}.\nAre you okay with this(y/n)? ")
@@ -117,7 +123,7 @@ while selectedClasse == None:
                 selectedClasse = wizard
                 break
             else:
-                print("Select your Classe, Â¡por favor!")
+                print("Select your Classe, ¡por favor!")
                 continue
         case "3":
            answer = input(f"You selected {oplita}.\nAre you okay with this(y/n)? ")
@@ -137,7 +143,6 @@ while selectedClasse == None:
 print(f"Are you ready to start, {selectedClasse.name}?")
 print(f"Your first enemy is {bandit}")
 print(f"You use {defm.name}")
-print(f"{defm.name} lowers {bandit.name}'s DEF!")
 # How to change a stat
 defm.applyEffect(selectedClasse, bandit)
 print(f"{bandit.name}'s DEF is now {bandit.stats["DEF"]}")
@@ -145,5 +150,8 @@ print(f"{bandit.name}'s DEF is now {bandit.stats["DEF"]}")
 gameOver = False
 while gameOver == False:
     #action = input(f"What card would you like to use?\n{fireball.name}, {heal.name}, {atkp.name}")
-    print(player_deck[1])
-    action = input(f"What card would you like to use?\n")
+    print(f"What card would you like to use?\n")
+    my_deck()
+    # TRYING TO MAKE THIS WORK
+    #print(player_deck)
+    gameOver = True
