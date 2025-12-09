@@ -31,17 +31,19 @@ class Card:
     def __str__(self):
         return f"{self.name} {self.effect} {self.power}"
     
-    # self == card, player == card player, enemy == receiver
+    # self == card, player == who plays the card, enemy == receiver
     def applyEffect (self, player, enemy):
         effect = self.effect.lower()
         if effect == "attack":
             enemy.stats["HP"] -= self.power
             print(f"{self.name} does {self.power} damage to {enemy.name}'s HP")
+            print(f"{enemy.name}'s HP: {enemy.stats["HP"]}")
         elif effect == "heal":
-            enemy.stats["HP"] += self.power
-            print(f"{self.name} heals {self.power} HPs to {enemy.name}")
+            player.stats["HP"] += self.power
+            print(f"{self.name} heals {self.power} HPs to {player.name}")
+            print(f"{player.name}'s HP: {player.stats["HP"]}")
 
-	# Buffs & Debuffs
+	    # Buffs & debuffs
         elif effect.startswith("buff") or effect.startswith("debuff"):
             # Splits the words "buff ATK" -> ["buff", "ATK"]
             parts = effect.split()
@@ -51,12 +53,29 @@ class Card:
                 stat = stat.upper()
                 if action == "buff":
                     enemy.stats[stat] += self.power
-                    print(f"{self.name} boosts {enemy.name}'s {stat} by {self.power}")
+                    print(f"{self.name} boosts {player.name}'s {stat} by {self.power}")
+                    print(f"{self.name}'s {stat}: {player.self[stat]}")
                 elif action == "debuff":
                     enemy.stats[stat] -= self.power
                     print(f"{self.name} lowers {enemy.name}'s {stat} by {self.power}")
+                    print(f"{enemy.name}'s {stat}: {enemy.stats[stat]}")
                 else:
                     print(f"{stat} not found!")
+# TODO
+        # Other effects (poison, confusion, etc.)
+        #elif effect.startswith("poison"):
+        #    # Splits the words "poison 3" -> ["poison", "3"]
+        #    parts = effect.split()
+        #    if effect == "attack":
+        #        enemy.stats["HP"] -= self.power
+        #        print(f"{self.name} does {self.power} damage to {enemy.name}'s HP")
+        #        print(f"{enemy.name}'s HP: {enemy.stats["HP"]}")
+        #    elif effect == "heal":
+        #        enemy.stats["HP"] += self.power
+        #        print(f"{self.name} heals {self.power} HPs to {enemy.name}")
+        #        print(f"{enemy.name}'s HP: {enemy.stats["HP"]}")
+
+
 # Damage cards
 fireball = Card("Fireball", "attack", 5)
 dmg_deck = [
@@ -70,7 +89,7 @@ heal_deck = [
 ]
 
 # Status cards
-poison = Card("Poison", "poison damage", 1)
+poison = Card("Poison", "poison 3", 1)
 atkp = Card("Strength", "buff ATK", 1)
 defm = Card("Soft", "debuff DEF", 1)
 status_deck = [
@@ -91,10 +110,19 @@ def my_deck():
     for card in player_deck:
         print(f"{n}. {card}")
         n += 1
-#for cards in player_deck:
-#    cards = 0
-#    print(player_deck[cards])
-#    cards = cards + 1
+
+# Select a card
+def choose_card():
+    while True:
+        try:
+            choice = int(input("Select a card to play: "))
+            if 1 <= choice <= len(player_deck):
+                return player_deck[choice-1]
+            else:
+                print("Choose a valid card number!")
+        except ValueError:
+            print("Please, type a card number!")
+
 
 print("Please, select your Classe:")
 selectedClasse = None
@@ -103,7 +131,7 @@ while selectedClasse == None:
     selection = input(f"1. {warrior}\n2. {wizard}\n3. {oplita}\n")
     match selection:
         case "1":
-            answer = input(f"You selected {warrior}.\nAre you okay with this(y/n)? ")
+            answer = input(f"You selected {warrior}.\nAre you okay with this? (y/n) ")
             if answer.lower() == "n":
                 print("What Classe would you choose?")
                 continue
@@ -115,7 +143,7 @@ while selectedClasse == None:
                 print("Select your Classe, ¡por favor!")
                 continue
         case "2":
-            answer = input(f"You selected {wizard}.\nAre you okay with this(y/n)? ")
+            answer = input(f"You selected {wizard}.\nAre you okay with this? (y/n) ")
             if answer.lower() == "n":
                 print("What Classe would you choose?")
                 continue
@@ -126,7 +154,7 @@ while selectedClasse == None:
                 print("Select your Classe, ¡por favor!")
                 continue
         case "3":
-           answer = input(f"You selected {oplita}.\nAre you okay with this(y/n)? ")
+           answer = input(f"You selected {oplita}.\nAre you okay with this? (y/n) ")
            if answer.lower() == "n":
                 print("What Classe would you choose?")
                 continue
@@ -142,16 +170,19 @@ while selectedClasse == None:
 
 print(f"Are you ready to start, {selectedClasse.name}?")
 print(f"Your first enemy is {bandit}")
-print(f"You use {defm.name}")
+print(f"You use {heal.name}")
 # How to change a stat
-defm.applyEffect(selectedClasse, bandit)
-print(f"{bandit.name}'s DEF is now {bandit.stats["DEF"]}")
+heal.applyEffect(selectedClasse, bandit)
 
 gameOver = False
 while gameOver == False:
     #action = input(f"What card would you like to use?\n{fireball.name}, {heal.name}, {atkp.name}")
     print(f"What card would you like to use?\n")
     my_deck()
+
+    selected_card = choose_card()
+    print(f"You played: {selected_card.name}!\n")
+    selected_card.applyEffect(selectedClasse, bandit)
     # TRYING TO MAKE THIS WORK
     #print(player_deck)
     gameOver = True
