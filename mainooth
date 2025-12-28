@@ -52,9 +52,9 @@ class Card:
                 action, stat = parts
                 stat = stat.upper()
                 if action == "buff":
-                    enemy.stats[stat] += self.power
+                    player.stats[stat] += self.power
                     print(f"{self.name} boosts {player.name}'s {stat} by {self.power}")
-                    print(f"{self.name}'s {stat}: {player.self[stat]}")
+                    print(f"{player.name}'s {stat}: {player.stats[stat]}")
                 elif action == "debuff":
                     enemy.stats[stat] -= self.power
                     print(f"{self.name} lowers {enemy.name}'s {stat} by {self.power}")
@@ -183,6 +183,4 @@ while gameOver == False:
     selected_card = choose_card()
     print(f"You played: {selected_card.name}!\n")
     selected_card.applyEffect(selectedClasse, bandit)
-    # TRYING TO MAKE THIS WORK
-    #print(player_deck)
     gameOver = True
