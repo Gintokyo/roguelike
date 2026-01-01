@@ -41,6 +41,8 @@ class Card:
                 else:
                     print(f"{stat} not found!")
 
+# Card database
+
 # Damage cards
 fireball = Card("Fireball", "attack", 5)
 dmg_deck = [

@@ -2,6 +2,9 @@
 
 # Importing the player_deck
 from cards import player_deck
+from classes import enemy_list
+# This is needed to randomly select what enemy the player's gonna face at a time
+import random
 
 # Function to print cards in the deck (will become Cards in Hand)
 def my_deck():
@@ -21,6 +24,11 @@ def choose_card():
                 print("Choose a valid card number!")
         except ValueError:
             print("Please, type a card number!")
+
+# Select a random enemy
+def enemy_select():
+    currentEnemy = random.choice(enemy_list)
+    return currentEnemy
 
 # Function to keep track of turns
 #def battle_turns():
