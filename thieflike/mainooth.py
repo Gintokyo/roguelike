@@ -1,7 +1,7 @@
 # Roguelike game
 
 from classes import *
-from functions import my_deck, choose_card, enemy_select
+from functions import my_deck, choose_card, enemy_select, battle_turns
 
 
 print("Hi and welcome to this Thieflike, a... Roguelike game!\n")
@@ -47,18 +47,18 @@ while selectedClasse == None:
         case _:
             print(f"Select a Classe before starting!")
 
-
-current_enemy = enemy_select()
-print(f"Are you ready to start, {selectedClasse}?")
-print(f"Your first enemy is {current_enemy}")
 gameOver = False
-
 while gameOver == False:
-    #action = input(f"What card would you like to use?\n{fireball.name}, {heal.name}, {atkp.name}")
+    turn = 0
+    current_enemy = enemy_select()
+    print(f"Are you ready to start, {selectedClasse}?")
+    print(f"Your first enemy is {current_enemy}")
+
     print(f"What card would you like to use?\n")
     my_deck()
     # current_enemy.name returns an error because it tries to print a string while the function is returning an object
     selected_card = choose_card()
     print(f"You played: {selected_card.name}!\n")
     selected_card.applyEffect(selectedClasse, current_enemy)
+    battle_turns(turn, selectedClasse, current_enemy)
     gameOver = True

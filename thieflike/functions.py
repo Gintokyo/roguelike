@@ -31,10 +31,9 @@ def enemy_select():
     return currentEnemy
 
 # Function to keep track of turns
-#def battle_turns():
-#    turn = 1
-#    if bandit["HP"] <= 0:
-#        
-#    else:
-#        endBattle = True
-#    print(turn)
+def battle_turns(x, player, enemy):
+    turn = x
+    while player.stats["HP"] >=0 and enemy.stats["HP"] >= 0:
+        current_turn = turn
+        current_turn += 1
+        print(current_turn)

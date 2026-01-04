@@ -12,6 +12,7 @@ class Classe:
 warrior = Classe("Warrior",{"HP": 25, "ATK": 15, "DEF": 15})
 wizard = Classe("Wizard",{"HP": 15, "ATK": 25, "DEF": 5})
 oplita = Classe("Oplita",{"HP": 20, "ATK": 10, "DEF": 20})
+
 # TODO Need to optimize the code with a similar function to the enemy_list
 classe_list = [
     warrior,
