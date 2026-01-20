@@ -49,16 +49,22 @@ while selectedClasse == None:
 
 gameOver = False
 while gameOver == False:
-    turn = 0
     current_enemy = enemy_select()
     print(f"Are you ready to start, {selectedClasse}?")
     print(f"Your first enemy is {current_enemy}")
 
-    print(f"What card would you like to use?\n")
-    my_deck()
-    # current_enemy.name returns an error because it tries to print a string while the function is returning an object
-    selected_card = choose_card()
-    print(f"You played: {selected_card.name}!\n")
-    selected_card.applyEffect(selectedClasse, current_enemy)
-    battle_turns(turn, selectedClasse, current_enemy)
-    gameOver = True
+    # I needed to transform "HP" into int, even though I thought it was already and int, lel
+    while int(selectedClasse.stats["HP"]) > 0 or int(current_enemy.stats["HP"]) > 0:
+        turn = 0
+        print(f"What card would you like to use?\n")
+        my_deck()
+        # current_enemy.name returns an error because it tries to print a string while the function is returning an object
+        selected_card = choose_card()
+        print(f"You played: {selected_card.name}!\n")
+        selected_card.applyEffect(selectedClasse, current_enemy)
+        #battle_turns(turn, selectedClasse, current_enemy)
+        turn += 1
+        print(turn)
+    else:
+        # With gameOver = True it seems to stop but it will begin anew after the enemy or the player reach 0 HP (which could be a good thing)
+        gameOver = True
