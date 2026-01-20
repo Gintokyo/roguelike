@@ -48,6 +48,8 @@ while selectedClasse == None:
             print(f"Select a Classe before starting!")
 
 gameOver = False
+# turn should be here, outside the loop, in order to be updated
+# turn = 0
 while gameOver == False:
     current_enemy = enemy_select()
     print(f"Are you ready to start, {selectedClasse}?")
