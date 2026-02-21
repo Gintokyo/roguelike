@@ -1,7 +1,7 @@
 # Roguelike game
 
 from classes import *
-from functions import my_deck, choose_card, enemy_select, battle_turns
+from functions import my_deck, choose_card, enemy_select#, battle_turns
 
 
 print("Hi and welcome to this Thieflike, a... Roguelike game!\n")
@@ -49,15 +49,13 @@ while selectedClasse == None:
 
 gameOver = False
 # turn should be here, outside the loop, in order to be updated
-# turn = 0
+turn = 0
 while gameOver == False:
     current_enemy = enemy_select()
     print(f"Are you ready to start, {selectedClasse}?")
     print(f"Your first enemy is {current_enemy}")
 
-    # I needed to transform "HP" into int, even though I thought it was already and int, lel
-    while int(selectedClasse.stats["HP"]) > 0 or int(current_enemy.stats["HP"]) > 0:
-        turn = 0
+    while selectedClasse.stats["HP"] > 0 and current_enemy.stats["HP"] > 0:
         print(f"What card would you like to use?\n")
         my_deck()
         # current_enemy.name returns an error because it tries to print a string while the function is returning an object
@@ -70,3 +68,4 @@ while gameOver == False:
     else:
         # With gameOver = True it seems to stop but it will begin anew after the enemy or the player reach 0 HP (which could be a good thing)
         gameOver = True
+print("GG WP!")

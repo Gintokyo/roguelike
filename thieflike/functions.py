@@ -30,12 +30,12 @@ def enemy_select():
     currentEnemy = random.choice(enemy_list)
     return currentEnemy
 
-# Function to keep track of turns
+# Function to keep track of turns NOT READY YET
 def battle_turns(x, player, enemy):
-    turno = x
-    while player.stats["HP"] >=0 and enemy.stats["HP"] >= 0:
-        current_turn = turno
-        current_turn += 1
-        print(current_turn)
-    else:
-        gameOver = True
+   turno = x
+   while player.stats["HP"] >0 and enemy.stats["HP"] > 0:
+       current_turn = turno
+       current_turn += 1
+       print(current_turn)
+   else:
+       gameOver = True
