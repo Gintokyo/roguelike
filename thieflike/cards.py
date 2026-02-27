@@ -15,7 +15,10 @@ class Card:
         if effect == "attack":
             enemy.stats["HP"] -= self.power
             print(f"{self.name} does {self.power} damage to {enemy.name}'s HP")
-            print(f"{enemy.name}'s HP: {enemy.stats["HP"]}")
+            if enemy.stats["HP"] < 0:
+                print(f"{enemy.name}'s HP: 0")
+            else:
+                print(f"{enemy.name}'s HP: {enemy.stats["HP"]}")
         elif effect == "heal":
             print(f"{player.name}'s HP: {player.stats["HP"]}")
             player.stats["HP"] += self.power
@@ -37,7 +40,10 @@ class Card:
                 elif action == "debuff":
                     enemy.stats[stat] -= self.power
                     print(f"{self.name} lowers {enemy.name}'s {stat} by {self.power}")
-                    print(f"{enemy.name}'s {stat}: {enemy.stats[stat]}")
+                    if enemy.stats[stat] < 0:
+                        print(f"{enemy.name}'s {stat}: 0")
+                    else:
+                        print(f"{enemy.name}'s {stat}: {enemy.stats[stat]}")
                 else:
                     print(f"{stat} not found!")
 
@@ -67,6 +73,13 @@ status_deck = [
 
 # Player's deck
 player_deck = [
+    fireball,
+    heal,
+    atkp
+    ]
+
+# Enemy's deck
+enemy_deck = [
     fireball,
     heal,
     atkp
