@@ -1,7 +1,7 @@
 # Roguelike game
 
 from classes import *
-from functions import my_deck, choose_card, enemy_select#, battle_turns
+from functions import my_deck, choose_card, enemy_select, opponent_card#, battle_turns
 
 
 print("Hi and welcome to this Thieflike, a... Roguelike game!\n")
@@ -62,6 +62,8 @@ while gameOver == False:
         selected_card = choose_card()
         print(f"You played: {selected_card.name}!\n")
         selected_card.applyEffect(selectedClasse, current_enemy)
+        # TODO: make it apply the effect of the card and only play if the enemy is still alive
+        opponent_choice = opponent_card()
         #battle_turns(turn, selectedClasse, current_enemy)
         turn += 1
         print(turn)
