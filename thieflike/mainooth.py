@@ -64,7 +64,7 @@ while gameOver == False:
         selected_card.applyEffect(selectedClasse, current_enemy)
         # TODO: make it apply the effect of the card and only play if the enemy is still alive
         opponent_choice = opponent_card()
-# This should be opponent_choice not selected_card
+        # This should be opponent_choice not selected_card
         selected_card.applyEffect(current_enemy, selectedClasse)
         #battle_turns(turn, selectedClasse, current_enemy)
         turn += 1
