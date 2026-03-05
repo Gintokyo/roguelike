@@ -62,13 +62,12 @@ while gameOver == False:
         selected_card = choose_card()
         print(f"You played: {selected_card.name}!\n")
         selected_card.applyEffect(selectedClasse, current_enemy)
-        # TODO: make it apply the effect of the card and only play if the enemy is still alive
         opponent_choice = opponent_card()
-        # This should be opponent_choice not selected_card
-        selected_card.applyEffect(current_enemy, selectedClasse)
+        print(f"{current_enemy.name} played: {opponent_choice.name}!\n")
+        opponent_choice.applyEffect(current_enemy, selectedClasse)
         #battle_turns(turn, selectedClasse, current_enemy)
         turn += 1
-        print(turn)
+        print(f"Turns elapsed: {turn}")
     else:
         # With gameOver = True it seems to stop but it will begin anew after the enemy or the player reach 0 HP (which could be a good thing)
         gameOver = True
