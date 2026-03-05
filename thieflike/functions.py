@@ -40,7 +40,8 @@ def opponent_deck():
 # The enemy selects a card
 def opponent_card():
     enemy_card = random.choice(enemy_deck)
-    print(enemy_card)
+    # Amended print() with return otherwise, of course, it would not RETURN values, lmaos
+    return(enemy_card)
 
 # Function to keep track of turns NOT READY YET
 #def battle_turns(x, player, enemy):
