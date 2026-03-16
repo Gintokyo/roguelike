@@ -6,14 +6,13 @@ class Classe:
         
     # Printing nicer output
     def __str__(self):
-        return f"{self.name} -> " + " ".join(f"{k}: {v}" for k, v in self.stats.items())
+        return f"{self.name} -> " + " ".join(f"{k}: {v}" for k, v in self.stats.items() if k != "MAX_HP")
     
 # Classes
-warrior = Classe("Warrior",{"HP": 25, "ATK": 15, "DEF": 15})
-wizard = Classe("Wizard",{"HP": 15, "ATK": 25, "DEF": 5})
-oplita = Classe("Oplita",{"HP": 20, "ATK": 10, "DEF": 20})
+warrior = Classe("Warrior",{"MAX_HP": 25, "HP": 25, "ATK": 15, "DEF": 15})
+wizard = Classe("Wizard",{"MAX_HP": 15, "HP": 15, "ATK": 25, "DEF": 5})
+oplita = Classe("Oplita",{"MAX_HP": 20, "HP": 20, "ATK": 10, "DEF": 20})
 
-# TODO Need to optimize the code with a similar function to the enemy_list
 classe_list = [
     warrior,
     wizard,
@@ -21,8 +20,8 @@ classe_list = [
 ]
 
 # Enemies
-bandit = Classe("Bandit",{"HP": 10, "ATK": 5, "DEF": 2})
-warlock = Classe("Warlock",{"HP": 8, "ATK": 7, "DEF": 2})
+bandit = Classe("Bandit",{"MAX_HP": 10, "HP": 10, "ATK": 5, "DEF": 2})
+warlock = Classe("Warlock",{"MAX_HP": 8, "HP": 8, "ATK": 7, "DEF": 2})
 
 enemy_list = [
     bandit,
