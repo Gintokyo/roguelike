@@ -11,9 +11,6 @@ class Card:
     
     # self == card, player == who plays the card, enemy == receiver
     def applyEffect (self, player, enemy):
-        # Problem with Max HP not going back to max
-        player_max_hp = player.stats["HP"]
-        enemy_max_hp = enemy.stats["HP"]
         effect = self.effect.lower()
         if effect == "attack":
             enemy.stats["HP"] -= self.power
@@ -26,9 +23,9 @@ class Card:
             print(f"{player.name}'s HP: {player.stats["HP"]}")
             player.stats["HP"] += self.power
             # Make the HP actually change up to the MAX hp of the character
-            if player.stats["HP"] > player_max_hp:
-                player.stats["HP"] = player_max_hp
-                print(f"{player.name}'s HP: {player_max_hp}")
+            if player.stats["HP"] > player.stats["MAX_HP"]:
+                player.stats["HP"] = player.stats["MAX_HP"]
+                print(f"{player.name}'s HP: {player.stats["MAX_HP"]}")
             else:
                 print(f"{self.name} heals {self.power} HPs to {player.name}")
                 print(f"{player.name}'s HP: {player.stats["HP"]}")
