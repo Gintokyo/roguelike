@@ -16,19 +16,19 @@ class Card:
             enemy.stats["HP"] -= self.power
             print(f"{self.name} does {self.power} damage to {enemy.name}'s HP")
             if enemy.stats["HP"] < 0:
-                print(f"{enemy.name}'s HP: 0")
+                print(f"{enemy.name}'s HP: {max(0, enemy.stats["HP"])}")
             else:
-                print(f"{enemy.name}'s HP: {enemy.stats["HP"]}")
+                print(f"{enemy.name}'s HP: {enemy.stats["HP"]}/{enemy.stats["MAX_HP"]}")
         elif effect == "heal":
             print(f"{player.name}'s HP: {player.stats["HP"]}")
             player.stats["HP"] += self.power
             # Make the HP actually change up to the MAX hp of the character
             if player.stats["HP"] > player.stats["MAX_HP"]:
                 player.stats["HP"] = player.stats["MAX_HP"]
-                print(f"{player.name}'s HP: {player.stats["MAX_HP"]}")
+                print(f"{player.name}'s HP: {player.stats["MAX_HP"]}/{player.stats["MAX_HP"]}")
             else:
                 print(f"{self.name} heals {self.power} HPs to {player.name}")
-                print(f"{player.name}'s HP: {player.stats["HP"]}")
+                print(f"{player.name}'s HP: {player.stats["HP"]}/{player.stats["MAX_HP"]}")
 
 	    # Buffs & debuffs
         elif effect.startswith("buff") or effect.startswith("debuff"):
