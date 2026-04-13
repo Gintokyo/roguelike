@@ -12,37 +12,37 @@ class Card:
     # self == card, player == who plays the card, enemy == receiver
     def applyEffect (self, player, enemy):
         effect = self.effect.lower()
-        if effect == "attack":
-            enemy.stats["HP"] -= self.power
+        if effect == 'attack':
+            enemy.stats['HP'] -= self.power
             print(f"{self.name} does {self.power} damage to {enemy.name}'s HP")
-            if enemy.stats["HP"] < 0:
-                print(f"{enemy.name}'s HP: {max(0, enemy.stats["HP"])}")
+            if enemy.stats['HP'] < 0:
+                print(f"{enemy.name}'s HP: {max(0, enemy.stats['HP'])}")
             else:
-                print(f"{enemy.name}'s HP: {enemy.stats["HP"]}/{enemy.stats["MAX_HP"]}")
-        elif effect == "heal":
-            print(f"{player.name}'s HP: {player.stats["HP"]}")
-            player.stats["HP"] += self.power
+                print(f"{enemy.name}'s HP: {enemy.stats['HP']}/{enemy.stats['MAX_HP']}")
+        elif effect == 'heal':
+            print(f"{player.name}'s HP: {player.stats['HP']}")
+            player.stats['HP'] += self.power
             # Make the HP actually change up to the MAX hp of the character
-            if player.stats["HP"] > player.stats["MAX_HP"]:
-                player.stats["HP"] = player.stats["MAX_HP"]
-                print(f"{player.name}'s HP: {player.stats["MAX_HP"]}/{player.stats["MAX_HP"]}")
+            if player.stats['HP'] > player.stats['MAX_HP']:
+                player.stats['HP'] = player.stats['MAX_HP']
+                print(f"{player.name}'s HP: {player.stats['MAX_HP']}/{player.stats['MAX_HP']}")
             else:
                 print(f"{self.name} heals {self.power} HPs to {player.name}")
-                print(f"{player.name}'s HP: {player.stats["HP"]}/{player.stats["MAX_HP"]}")
+                print(f"{player.name}'s HP: {player.stats['HP']}/{player.stats['MAX_HP']}")
 
 	    # Buffs & debuffs
-        elif effect.startswith("buff") or effect.startswith("debuff"):
+        elif effect.startswith('buff') or effect.startswith('debuff'):
             # Splits the words "buff ATK" -> ["buff", "ATK"]
             parts = effect.split()
             if len(parts) == 2:
                 # 'parts' will be composed of 'action' and 'stat'
                 action, stat = parts
                 stat = stat.upper()
-                if action == "buff":
+                if action == 'buff':
                     player.stats[stat] += self.power
                     print(f"{self.name} boosts {player.name}'s {stat} by {self.power}")
                     print(f"{player.name}'s {stat}: {player.stats[stat]}")
-                elif action == "debuff":
+                elif action == 'debuff':
                     enemy.stats[stat] -= self.power
                     print(f"{self.name} lowers {enemy.name}'s {stat} by {self.power}")
                     if enemy.stats[stat] < 0:
@@ -55,21 +55,21 @@ class Card:
 # Card database
 
 # Damage cards
-fireball = Card("Fireball", "attack", 5)
+fireball = Card('Fireball', 'attack', 5)
 dmg_deck = [
     fireball
 ]
 
 # Healing cards
-heal = Card("Heal", "heal", 5)
+heal = Card('Heal', 'heal', 5)
 heal_deck = [
     heal
 ]
 
 # Status cards
-poison = Card("Poison", "poison 3", 1)
-atkp = Card("Strength", "buff ATK", 1)
-defm = Card("Soft", "debuff DEF", 1)
+poison = Card('Poison', 'poison 3', 1)
+atkp = Card('Strength', 'buff ATK', 1)
+defm = Card('Soft', 'debuff DEF', 1)
 status_deck = [
     poison,
     atkp,

@@ -55,7 +55,7 @@ while gameOver == False:
     print(f"Are you ready to start, {selectedClasse}?")
     print(f"Your first enemy is {current_enemy}")
 
-    while selectedClasse.stats["HP"] > 0 and current_enemy.stats["HP"] > 0:
+    while selectedClasse.stats['HP'] > 0 and current_enemy.stats['HP'] > 0:
         print(f"What card would you like to use?\n")
         my_deck()
         # current_enemy.name returns an error because it tries to print a string while the function is returning an object
