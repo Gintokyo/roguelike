@@ -29,6 +29,8 @@ class Card:
             else:
                 print(f"{self.name} heals {self.power} HPs to {player.name}")
                 print(f"{player.name}'s HP: {player.stats['HP']}/{player.stats['MAX_HP']}")
+        elif effect == 'poison':
+            player.status_effect = 'poison'
 
 	    # Buffs & debuffs
         elif effect.startswith('buff') or effect.startswith('debuff'):
