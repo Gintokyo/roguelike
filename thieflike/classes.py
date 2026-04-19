@@ -3,7 +3,8 @@ class Classe:
     def __init__(self, name, stats, status_effect):
         self.name = name
         self.stats = stats
-        self.status_effect = status_effect
+        # This will allow me to store more status effects at once
+        self.status_effect = {}
         
     # Printing nicer output
     def __str__(self):
@@ -29,4 +30,12 @@ warlock = Classe('Warlock',{'MAX_HP': 8, 'HP': 8, 'ATK': 7, 'DEF': 2}, None)
 enemy_list = [
     bandit,
     warlock
+]
+
+# Status
+
+poison = 'poison'
+
+status_list = [
+    poison
 ]

@@ -20,18 +20,15 @@ class Card:
             else:
                 print(f"{enemy.name}'s HP: {enemy.stats['HP']}/{enemy.stats['MAX_HP']}")
         elif effect == 'heal':
-            print(f"{player.name}'s HP: {player.stats['HP']}")
             player.stats['HP'] += self.power
             # Make the HP actually change up to the MAX hp of the character
             if player.stats['HP'] > player.stats['MAX_HP']:
                 player.stats['HP'] = player.stats['MAX_HP']
-                print(f"{player.name}'s HP: {player.stats['MAX_HP']}/{player.stats['MAX_HP']}")
+                print(f"{player.name}'s HP are aready maxed out: {player.stats['MAX_HP']}/{player.stats['MAX_HP']}")
             else:
                 print(f"{self.name} heals {self.power} HPs to {player.name}")
                 print(f"{player.name}'s HP: {player.stats['HP']}/{player.stats['MAX_HP']}")
-        elif effect == 'poison':
-            player.status_effect = 'poison'
-
+       
 	    # Buffs & debuffs
         elif effect.startswith('buff') or effect.startswith('debuff'):
             # Splits the words "buff ATK" -> ["buff", "ATK"]
@@ -54,6 +51,21 @@ class Card:
                 else:
                     print(f"{stat} not found!")
 
+       # Status effects
+       # Poison
+        elif effect.startswith('poison'):
+            parts = effect.split()
+            if len(parts) == 2:
+                _, duration = parts
+                duration = int(duration)
+                # This will allow to check poison regardless of other status_effect are already active
+                # if enemy.status_effect == 'poison' only checks if the values equal to 'poison'
+                if 'poison' in enemy.status_effect:
+                    print(f"{enemy.name} is already poisoned!")
+                else:
+                    enemy.status_effect['poison'] = duration
+                    print(f"{enemy.name} has been poisoned for {duration} turns!")
+
 # Card database
 
 # Damage cards
@@ -69,11 +81,15 @@ heal_deck = [
 ]
 
 # Status cards
-poison = Card('Poison', 'poison 3', 1)
+poison = Card('Poison', 'poison 3', 3)
+status_deck =[
+    poison
+]
+
+# Buff/Debuff cards
 atkp = Card('Strength', 'buff ATK', 1)
 defm = Card('Soft', 'debuff DEF', 1)
-status_deck = [
-    poison,
+uff_deck = [
     atkp,
     defm
 ]
@@ -82,12 +98,14 @@ status_deck = [
 player_deck = [
     fireball,
     heal,
-    atkp
+    atkp,
+    poison
     ]
 
 # Enemy's deck
 enemy_deck = [
     fireball,
     heal,
-    atkp
+    atkp,
+    poison
     ]
