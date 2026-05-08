@@ -5,6 +5,8 @@ from cards import player_deck, enemy_deck
 from classes import enemy_list
 # This is needed to randomly select what enemy the player's gonna face at a time
 import random
+# This allows to copy a class without actually modufying the original
+import copy
 
 # Function to print cards in the deck (will become Cards in Hand)
 def my_deck():
@@ -27,9 +29,11 @@ def choose_card():
 
 # Select a random enemy
 def enemy_select():
-    currentEnemy = random.choice(enemy_list)
-    return currentEnemy
+    # deepcopy prevents from keeping old HP/Status
+    current_enemy = copy.deepcopy(random.choice(enemy_list))
+    return current_enemy
 
+# NOT NEEDED AS THE CARDS IN THE OPPONENTS HAND ARE NOT PRINTED
 # Function to print cards in enemy's deck (will become Cards in Hand)
 def opponent_deck():
     n = 1
@@ -42,13 +46,3 @@ def opponent_card():
     enemy_card = random.choice(enemy_deck)
     # Amended print() with return otherwise, of course, it would not RETURN values, lmaos
     return(enemy_card)
-
-# Function to keep track of turns NOT READY YET
-#def battle_turns(x, player, enemy):
-#   turno = x
-#   while player.stats["HP"] >0 and enemy.stats["HP"] > 0:
-#       current_turn = turno
-#       current_turn += 1
-#       print(current_turn)
-#   else:
-#       gameOver = True

@@ -1,14 +1,19 @@
 # Roguelike game
 
 from classes import *
-from functions import my_deck, choose_card, enemy_select, opponent_card#, battle_turns
+from functions import *
+from cards import *
 
 
 print("Hi and welcome to this Thieflike, a... Roguelike game!\n")
 print ("Please, select your class:")
 selectedClasse = None
 while selectedClasse == None:
-    selection = input(f"1. {warrior}\n2. {wizard}\n3. {oplita}\n")
+    selection = input(
+        f"1. {warrior}\n"
+        f"2. {wizard}\n"
+        f"3. {oplita}\n"
+    )
     match selection:
         case "1":
             answer = input(f"You selected {warrior}.\nAre you okay with this? (y/n) ")
@@ -56,18 +61,27 @@ while gameOver == False:
     print(f"Your first enemy is {current_enemy}")
 
     while selectedClasse.stats['HP'] > 0 and current_enemy.stats['HP'] > 0:
+        selectedClasse.process_status_effects()
+        current_enemy.process_status_effects()
         print(f"What card would you like to use?\n")
         my_deck()
         # current_enemy.name returns an error because it tries to print a string while the function is returning an object
         selected_card = choose_card()
         print(f"You played: {selected_card.name}!\n")
         selected_card.applyEffect(selectedClasse, current_enemy)
+        
+        # Prevents dead enemies acting
+        if current_enemy.stats['HP'] <= 0:
+            break
+
         opponent_choice = opponent_card()
         print(f"{current_enemy.name} played: {opponent_choice.name}!\n")
         opponent_choice.applyEffect(current_enemy, selectedClasse)
         #battle_turns(turn, selectedClasse, current_enemy)
         turn += 1
         print(f"Turns elapsed: {turn}")
+        # Just to check the status effect for debugging purposes
+        #print(f"Status effect {current_enemy.status_effects}")
     else:
         # With gameOver = True it seems to stop but it will begin anew after the enemy or the player reach 0 HP (which could be a good thing)
         gameOver = True

@@ -1,21 +1,62 @@
 # Classes
 class Classe:
-    def __init__(self, name, stats, status_effect):
+    def __init__(self, name, stats):
         self.name = name
         self.stats = stats
         # This will allow me to store more status effects at once
-        self.status_effect = {}
+        self.status_effects = {}
         
     # Printing nicer output
     def __str__(self):
-        # I don't need to not to return status_effect because it's not in .stats, of course (not so obvious the 1st time for me)
+        # I don't need to not to return status_effects because it's not in .stats, of course (not so obvious the 1st time for me)
         return f"{self.name} -> " + " ".join(f"{k}: {v}" for k, v in self.stats.items() if k != 'MAX_HP')
+    # This will allow me make changes to the 'HP' automatically, removing enemy.stats['HP'] -= self.power
+    def take_damage(self, amount):
+        self.stats['HP'] -= amount
+        # Prevents negative HP
+        self.stats['HP'] = max(0, self.stats['HP'])
+        print(f"{self.name}'s HP: {self.stats['HP']}")
+
+    def heal(self, amount):
+        self.stats['HP'] += amount
+         # Make the HP actually change up to the MAX hp of the character
+        if self.stats['HP'] > self.stats['MAX_HP']:
+            self.stats['HP'] = self.stats['MAX_HP']
+            print(f"{self.name}'s HP are aready maxed out: {self.stats['MAX_HP']}/{self.stats['MAX_HP']}")
+        else:
+            print(f"{self.name} heals for {amount}")
+            print(f"{self.name}'s HP: {self.stats['HP']}/{self.stats['MAX_HP']}")
+
+    def apply_status(self, effect, duration):
+        if effect in self.status_effects:
+            print(f"{self.name} is already affected by {effect}!")
+        else:
+            self.status_effects[effect] = duration
+            print(f"{self.name} is affected by {effect} for {duration} turns!")
+
+    def process_status_effects(self):
+        # Poison
+        if 'poison' in self.status_effects:
+            print(f"{self.name} suffers 1 poison damage!")
+            self.take_damage(1)
+            self.status_effects['poison'] -= 1
+            print(f"Poison turns left: {self.status_effects['poison']}")
+        
+            if self.status_effects['poison'] <= 0:
+                del self.status_effects['poison']
+                print(f"{self.name} is no longer poisoned!")
 
 # Insert a visualizazion for MAX_HP/HP here
 # Classes
-warrior = Classe('Warrior',{'MAX_HP': 25, 'HP': 25, 'ATK': 15, 'DEF': 15}, None)
-wizard = Classe('Wizard',{'MAX_HP': 15, 'HP': 15, 'ATK': 25, 'DEF': 5}, None)
-oplita = Classe('Oplita',{'MAX_HP': 20, 'HP': 20, 'ATK': 10, 'DEF': 20}, None)
+warrior = Classe(
+    'Warrior',
+    {'MAX_HP': 25, 'HP': 25, 'ATK': 15, 'DEF': 15})
+wizard = Classe(
+    'Wizard',
+    {'MAX_HP': 15, 'HP': 15, 'ATK': 25, 'DEF': 5})
+oplita = Classe(
+    'Oplita',
+    {'MAX_HP': 20, 'HP': 20, 'ATK': 10, 'DEF': 20})
 
 classe_list = [
     warrior,
@@ -24,8 +65,12 @@ classe_list = [
 ]
 
 # Enemies
-bandit = Classe('Bandit',{'MAX_HP': 10, 'HP': 10, 'ATK': 5, 'DEF': 2}, None)
-warlock = Classe('Warlock',{'MAX_HP': 8, 'HP': 8, 'ATK': 7, 'DEF': 2}, None)
+bandit = Classe(
+    'Bandit',
+    {'MAX_HP': 10, 'HP': 10, 'ATK': 5, 'DEF': 2})
+warlock = Classe(
+    'Warlock',
+    {'MAX_HP': 8, 'HP': 8, 'ATK': 7, 'DEF': 2})
 
 enemy_list = [
     bandit,

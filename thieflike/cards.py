@@ -9,25 +9,19 @@ class Card:
     def __str__(self):
         return f"{self.name} {self.effect} {self.power}"
     
-    # self == card, player == who plays the card, enemy == receiver
+    # self == card
+    # player == who plays the card
+    # enemy == receiver
+    
     def applyEffect (self, player, enemy):
         effect = self.effect.lower()
+        # Attack
         if effect == 'attack':
-            enemy.stats['HP'] -= self.power
-            print(f"{self.name} does {self.power} damage to {enemy.name}'s HP")
-            if enemy.stats['HP'] < 0:
-                print(f"{enemy.name}'s HP: {max(0, enemy.stats['HP'])}")
-            else:
-                print(f"{enemy.name}'s HP: {enemy.stats['HP']}/{enemy.stats['MAX_HP']}")
+            print(f"{self.name} does {self.power} damage to {enemy.name}!")
+            enemy.take_damage(self.power)
+        # Heal
         elif effect == 'heal':
-            player.stats['HP'] += self.power
-            # Make the HP actually change up to the MAX hp of the character
-            if player.stats['HP'] > player.stats['MAX_HP']:
-                player.stats['HP'] = player.stats['MAX_HP']
-                print(f"{player.name}'s HP are aready maxed out: {player.stats['MAX_HP']}/{player.stats['MAX_HP']}")
-            else:
-                print(f"{self.name} heals {self.power} HPs to {player.name}")
-                print(f"{player.name}'s HP: {player.stats['HP']}/{player.stats['MAX_HP']}")
+            player.heal(self.power)
        
 	    # Buffs & debuffs
         elif effect.startswith('buff') or effect.startswith('debuff'):
@@ -43,11 +37,10 @@ class Card:
                     print(f"{player.name}'s {stat}: {player.stats[stat]}")
                 elif action == 'debuff':
                     enemy.stats[stat] -= self.power
+                    if enemy.stats[stat] <= 0:
+                        enemy.stats[stat] = 0
                     print(f"{self.name} lowers {enemy.name}'s {stat} by {self.power}")
-                    if enemy.stats[stat] < 0:
-                        print(f"{enemy.name}'s {stat}: 0")
-                    else:
-                        print(f"{enemy.name}'s {stat}: {enemy.stats[stat]}")
+                    print(f"{enemy.name}'s {stat}: {enemy.stats[stat]}")
                 else:
                     print(f"{stat} not found!")
 
@@ -58,13 +51,7 @@ class Card:
             if len(parts) == 2:
                 _, duration = parts
                 duration = int(duration)
-                # This will allow to check poison regardless of other status_effect are already active
-                # if enemy.status_effect == 'poison' only checks if the values equal to 'poison'
-                if 'poison' in enemy.status_effect:
-                    print(f"{enemy.name} is already poisoned!")
-                else:
-                    enemy.status_effect['poison'] = duration
-                    print(f"{enemy.name} has been poisoned for {duration} turns!")
+                enemy.apply_status('poison', duration)
 
 # Card database
 
