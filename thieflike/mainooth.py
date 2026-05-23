@@ -6,6 +6,7 @@ from cards import *
 
 
 print("Hi and welcome to this Thieflike, a... Roguelike game!\n")
+pause()
 print ("Please, select your class:")
 selectedClasse = None
 while selectedClasse == None:
@@ -55,10 +56,13 @@ while selectedClasse == None:
 gameOver = False
 # turn should be here, outside the loop, in order to be updated
 turn = 0
+pause()
 while gameOver == False:
     current_enemy = enemy_select()
     print(f"Are you ready to start, {selectedClasse}?")
+    pause(.5)
     print(f"Your first enemy is {current_enemy}")
+    pause(.5)
 
     while selectedClasse.stats['HP'] > 0 and current_enemy.stats['HP'] > 0:
         selectedClasse.process_status_effects()
@@ -83,6 +87,7 @@ while gameOver == False:
         # Just to check the status effect for debugging purposes
         #print(f"Status effect {current_enemy.status_effects}")
     else:
-        # With gameOver = True it seems to stop but it will begin anew after the enemy or the player reach 0 HP (which could be a good thing)
-        gameOver = True
+        # With gameOver = True right here, it seems to stop but it will begin anew after the enemy or the player reach 0 HP (which could be a good thing)
+        break
+    gameOver = True
 print("GG WP!")

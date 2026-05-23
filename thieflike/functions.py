@@ -1,5 +1,7 @@
 # Contains most of the functions
 
+import time
+
 # Importing the player_deck
 from cards import player_deck, enemy_deck
 from classes import enemy_list
@@ -7,6 +9,10 @@ from classes import enemy_list
 import random
 # This allows to copy a class without actually modufying the original
 import copy
+
+# seconds=1 is a DEFAUL PARAMETER. It gets overwritten if an argument is used for the function however, if there is none, it runs as default
+def pause(seconds=1):
+    time.sleep(seconds)
 
 # Function to print cards in the deck (will become Cards in Hand)
 def my_deck():
