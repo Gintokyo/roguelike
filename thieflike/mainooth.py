@@ -8,6 +8,7 @@ from cards import *
 print("Hi and welcome to this Thieflike, a... Roguelike game!\n")
 pause()
 print ("Please, select your class:")
+pause(.7)
 selectedClasse = None
 while selectedClasse == None:
     selection = input(

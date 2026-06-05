@@ -77,7 +77,7 @@ enemy_list = [
     warlock
 ]
 
-# Status
+# Statuses
 
 poison = 'poison'
 
