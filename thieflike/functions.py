@@ -11,7 +11,7 @@ import random
 import copy
 
 # seconds=1 is a DEFAUL PARAMETER. It gets overwritten if an argument is used for the function however, if there is none, it runs as default
-def pause(seconds=1):
+def pause(seconds=.7):
     time.sleep(seconds)
 
 # Function to print cards in the deck (will become Cards in Hand)

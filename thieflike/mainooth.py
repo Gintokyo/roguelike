@@ -6,9 +6,9 @@ from cards import *
 
 
 print("Hi and welcome to this Thieflike, a... Roguelike game!\n")
-pause()
+pause(1)
 print ("Please, select your class:")
-pause(.7)
+pause()
 selectedClasse = None
 while selectedClasse == None:
     selection = input(
@@ -18,8 +18,11 @@ while selectedClasse == None:
     )
     match selection:
         case "1":
-            answer = input(f"You selected {warrior}.\nAre you okay with this? (y/n) ")
+            print(f"You selected {warrior}.")
+            pause()
+            answer = input("Are you okay with this? (y/n) ")
             if answer.lower() == "n":
+                pause()
                 print("What Classe would you choose?")
                 continue
             elif answer.lower() =="y":
@@ -27,10 +30,14 @@ while selectedClasse == None:
                 # break must be after the re-assignment of the variable
                 break
             else:
+                pause()
                 print("Select your Classe, ¡por favor!")
+                pause()
                 continue
         case "2":
-            answer = input(f"You selected {wizard}.\nAre you okay with this? (y/n) ")
+            print(f"You selected {wizard}.")
+            pause()
+            answer = input("Are you okay with this? (y/n) ")
             if answer.lower() == "n":
                 print("What Classe would you choose?")
                 continue
@@ -38,7 +45,9 @@ while selectedClasse == None:
                 selectedClasse = wizard
                 break
             else:
+                pause()
                 print("Select your Classe, ¡por favor!")
+                pause()
                 continue
         case "3":
            answer = input(f"You selected {oplita}.\nAre you okay with this? (y/n) ")
@@ -49,10 +58,13 @@ while selectedClasse == None:
                 selectedClasse = oplita
                 break
            else:
+                pause()
                 print("Select your Classe, ¡por favor!")
+                pause()
                 continue
         case _:
             print(f"Select a Classe before starting!")
+            pause()
 
 gameOver = False
 # turn should be here, outside the loop, in order to be updated
