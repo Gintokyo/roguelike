@@ -12,7 +12,7 @@ class Classe:
         return f"{self.name} -> " + " ".join(f"{k}: {v}" for k, v in self.stats.items() if k != 'MAX_HP')
     # This will allow me make changes to the 'HP' automatically, removing enemy.stats['HP'] -= self.power
     def take_damage(self, amount):
-        final_damage = amount + enemy.stats
+        #final_damage = amount + enemy.stats
         self.stats['HP'] -= amount
         # Prevents negative HP
         self.stats['HP'] = max(0, self.stats['HP'])
